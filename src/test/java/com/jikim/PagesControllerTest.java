@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -21,11 +20,29 @@ public class PagesControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testHomePage() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.get("/hello");  // building the request
-        this.mvc.perform(request)  // mvc.perform() mocks a request (arg request) to application
+    public void testHomePageGet() throws Exception {
+        RequestBuilder getRequest = MockMvcRequestBuilders.get("/hello");  // building the request
+
+        this.mvc.perform(getRequest)  // mvc.perform() mocks a request (arg request) to application
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello World!"));
     }
 
+    @Test
+    public void testHomePagePatch() throws Exception {
+        RequestBuilder patchRequest = MockMvcRequestBuilders.patch("/hello");
+
+        this.mvc.perform(patchRequest)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Hello there, someone!"));
+    }
+
+    @Test
+    public void testHomePageDelete() throws Exception{
+        RequestBuilder deleteRequest = MockMvcRequestBuilders.delete("/hello");
+
+        this.mvc.perform(deleteRequest)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Gooooooodbye, World!"));
+    }
 }
