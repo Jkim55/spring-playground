@@ -34,15 +34,15 @@ public class QueryStringControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("stub"));
+                .andExpect(content().string("{fname=Hannah, lname=Horvath}"));
     }
 
-//    @Test
-//    public void TestCustomObject () throws Exception {
-//        RequestBuilder request = MockMvcRequestBuilders.get("/hbo/customObject/girls?fname=Hannah&lname=Horvath");
-//
-//        this.mvc.perform(request)
-//                .andExpect(status().isOK())
-//                .andExpect(content().string("stub"));
-//    }
+    @Test
+    public void TestCustomObject () throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/hbo/customObject/girls?fname=Hannah&lname=Horvath");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Girl name is Hannah Horvath"));
+    }
 }

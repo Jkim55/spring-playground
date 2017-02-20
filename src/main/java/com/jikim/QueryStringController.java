@@ -24,5 +24,7 @@ public class QueryStringController {
     }
 
     @GetMapping("customObject/girls")
-    public S
+    public String findGirlObject(Girls girl){
+        return String.format("Girl name is %s %s", girl.getFname(), girl.getLname());
+    }
 }
