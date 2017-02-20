@@ -14,8 +14,8 @@ public class PagesController {
     }
 
     @PatchMapping ("/hello")
-    public String sayHelloToSomeone() { return "Hello there, someone!"; }
+    public String sayHelloPatch() { return "Hello World with patch!"; }
 
     @DeleteMapping ("/hello")
-    public String sayNothing() { return "Gooooooodbye, World!"; }
+    public String sayHelloDelete() { return "Hello World with delete!"; }
 }

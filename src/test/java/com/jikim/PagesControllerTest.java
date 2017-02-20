@@ -34,7 +34,7 @@ public class PagesControllerTest {
 
         this.mvc.perform(patchRequest)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello there, someone!"));
+                .andExpect(content().string("Hello World with patch!"));
     }
 
     @Test
@@ -43,6 +43,6 @@ public class PagesControllerTest {
 
         this.mvc.perform(deleteRequest)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Gooooooodbye, World!"));
+                .andExpect(content().string("Hello World with delete!"));
     }
 }
