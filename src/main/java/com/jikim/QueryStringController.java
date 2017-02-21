@@ -12,19 +12,19 @@ import java.util.Map;
 public class QueryStringController {
 
     @GetMapping("individual/girls")
-    public String findGirl(
+    public String findByName(
             @RequestParam String fname,
             @RequestParam String lname) {
         return String.format("Girl name is %s %s", fname, lname);
     }
 
     @GetMapping("hashMap/girls")
-    public String findGirlHash(@RequestParam Map querystring){
+    public String findAsHashMap(@RequestParam Map querystring){
         return querystring.toString();
     }
 
     @GetMapping("customObject/girls")
-    public String findGirlObject(Girls girl){
+    public String findFromCustomObject(Girls girl){
         return String.format("Girl name is %s %s", girl.getFname(), girl.getLname());
     }
 }

@@ -12,19 +12,19 @@ import java.util.Map;
 public class PathVariableController {
 
     @GetMapping("chairs/{designerId}/material/{typeId}")
-    public String findInventoryByPathVariableName (
+    public String findByName(
             @PathVariable int designerId,
             @PathVariable int typeId) {
         return String.format("Design Within Reach Chairs by %d of type %d", designerId, typeId);
     }
 
     @GetMapping("tables/{designerId}/material/{typeId}")
-    public String findInventoryByPathVariablesAsMap (@PathVariable Map pathVariables){
+    public String findAsHashMap(@PathVariable Map pathVariables){
         return pathVariables.toString();
     }
 
     @GetMapping("lighting/{designerId}/material/{typeId}")
-    public String findInventoryByPathVariablesFromACustomObject (InventorySearchParams searchParams) {
+    public String findFromCustomObject(InventorySearchParams searchParams) {
         return String.format("Design Within Reach Lighting Fixtures by %s of type %d", searchParams.getDesignerId() , searchParams.getTypeId());
     }
 }
