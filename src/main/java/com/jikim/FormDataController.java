@@ -29,7 +29,7 @@ public class FormDataController {
     }
 
     @PostMapping(value = "/customObject", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String formDataAsObject(CommentBody comment) {
-        return String.format("%s written by %s", comment.getComment(), comment.getAuthor());
+    public String formDataAsObject(CommentBody commentBody) {
+        return String.format("%s written by %s", commentBody.getComment(), commentBody.getAuthor());
     }
 }
