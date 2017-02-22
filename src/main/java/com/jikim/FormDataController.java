@@ -30,6 +30,6 @@ public class FormDataController {
 
     @PostMapping(value = "/customObject", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String formDataAsObject(CommentBody comment) {
-        return comment.toString();
+        return String.format("%s written by %s", comment.getComment(), comment.getAuthor());
     }
 }

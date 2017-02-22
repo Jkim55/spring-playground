@@ -66,7 +66,7 @@ public class FormDataControllerTest {
 
     @Test
     public void TestFetchAsCustomObject() throws Exception {
-        String content = "not a random int";
+        String content = "Not a rando";
 
         MockHttpServletRequestBuilder request = post("/comments/customObject")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -75,6 +75,7 @@ public class FormDataControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string(String.format("com.jikim.CommentBody@%s", content)));
+                .andExpect(content().string(String.format("Not a rando written by Jiggibot", content)));
     }
+
 }
