@@ -22,16 +22,59 @@ public class FormDataControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void TestCreateComment() throws Exception {
-        String content = String.valueOf(new Random().nextInt());
+    public void TestFetchAsString() throws Exception {
+        String comment = "blo bla";
+        String author = "Jiggibot";
 
         MockHttpServletRequestBuilder request = post("/comments/string")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("Whooty Whoot", content)
+                .param("comment", comment)
+                .param("author", author);
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.format("%s written by %s", comment, author)));
+    }
+
+    @Test
+    public void TestFetchAsRawString() throws Exception {
+        String content = String.valueOf(new Random().nextInt());
+
+        MockHttpServletRequestBuilder request = post("/comments/rawString")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("comment", content)
                 .param("author", "Jiggibot");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string(String.format("Whooty+Whoot=%s&author=Jiggibot", content)));
+                .andExpect(content().string(String.format("comment=%s&author=Jiggibot", content)));
+    }
+
+    @Test
+    public void TestFetchAsHashMap() throws Exception {
+        String content = String.valueOf(new Random().nextInt());
+
+        MockHttpServletRequestBuilder request = post("/comments/hashMap")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("comment", content)
+                .param("author", "Jiggibot");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.format("{comment=%s, author=Jiggibot}", content)));
+    }
+
+    @Test
+    public void TestFetchAsCustomObject() throws Exception {
+        String content = "not a random int";
+
+        MockHttpServletRequestBuilder request = post("/comments/customObject")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("comment", content)
+                .param("author", "Jiggibot");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.format("com.jikim.CommentBody@%s", content)));
     }
 }
