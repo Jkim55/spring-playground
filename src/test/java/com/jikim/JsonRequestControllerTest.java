@@ -23,16 +23,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(JsonRequestController.class)
-
 public class JsonRequestControllerTest {
+
     @Autowired
     private MockMvc mvc;
 
-//    Ensure that the JSON you are sending has multiple levels, and a mix of JSON arrays and objects such as
-
     @Test
     public void fetchAsStringLiteral() throws Exception {
-        MockHttpServletRequestBuilder request = post("/fluidCoffeeBar")
+        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/SingleItem")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"drink\": \"mule latte\", \"size\": \"medium\", \"price\": \"5.99\"}");
 
@@ -40,4 +38,65 @@ public class JsonRequestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Item is a medium mule latte at 5.99"));
     }
+
+    @Test
+    public void fetchAsGSONwithBuilder() throws Exception {
+        JsonObject person = new JsonObject();
+
+        person.addProperty("Beverage", "Mule Latte");
+
+        Gson builder = new GsonBuilder().create();
+
+        String jsonString = builder.toJson(person);
+
+        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/AnotherSingleItem")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonString);
+
+        this.mvc.perform(request).andExpect(status().isOk());
+    }
+
+    private Gson gson = new GsonBuilder().create();
+
+    static class  SearchRequestParams {
+        final String q;
+        final String from;
+
+        SearchRequestParams(String q, String from){
+            this.q = q;
+            this.from = from;
+        }
+    }
+
+
+//    @Test
+//    public void fetchAsGSONSerializedObject() throws Exception {
+//        SearchRequestParams params = new SearchRequestParams("something", "2008");
+//
+//        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/SingleReceipt")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(gson.toJson(params));
+//
+//        this.mvc.perform(request)
+//                .andExpect(status().isOk())
+//                .andExpect(content().string("Search: q=Something from=2008"));
+//    }
+//
+//    @Test
+//    public void fetchAsRawBodyFromFileFixturePull() throws Exception {
+//        String json = getJSON("/data.json");
+//
+//        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/ManyReceipts")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(json);
+//
+//        this.mvc.perform(request)
+//                .andExpect(status().isOk())
+//                .andExpect(content().string(json));
+//    }
+//
+//    private String getJSON(String path) throws Exception {
+//        URL url = this.getClass().getResource(path);
+//        return new String(Files.readAllBytes(Paths.get(url.getFile())));
+//    }
 }
