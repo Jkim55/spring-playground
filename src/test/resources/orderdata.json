@@ -1,0 +1,16 @@
+{
+  "name": "Jules Lee",
+  "fulfilled": true,
+  "items": [
+    {
+      "drink": "Cortado",
+      "size": "N/A",
+      "price": "2.75"
+    },
+    {
+      "drink": "Lemongrass Tea",
+      "size": "large",
+      "price": "3.85"
+    }
+  ]
+}

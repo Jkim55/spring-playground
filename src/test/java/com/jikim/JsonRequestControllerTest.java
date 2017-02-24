@@ -36,67 +36,69 @@ public class JsonRequestControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Item is a medium mule latte at 5.99"));
+                .andExpect(content().string("Item is a medium mule latte at $5.99"));
     }
 
     @Test
     public void fetchAsGSONwithBuilder() throws Exception {
-        JsonObject person = new JsonObject();
+        JsonObject order = new JsonObject();
+        order.addProperty("Medium Mocha Latte", false);
 
-        person.addProperty("Beverage", "Mule Latte");
+        Gson builder = new GsonBuilder().create();                  // 3
 
-        Gson builder = new GsonBuilder().create();
+        String jsonString = builder.toJson(order);                 // 4
 
-        String jsonString = builder.toJson(person);
-
-        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/AnotherSingleItem")
+        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/OrderProgress")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonString);
 
-        this.mvc.perform(request).andExpect(status().isOk());
+        this.mvc.perform(request)
+                .andExpect(status().isOk());
     }
 
     private Gson gson = new GsonBuilder().create();
 
-    static class  SearchRequestParams {
-        final String q;
-        final String from;
+    static class  SingleItem {
+        final String drink;
+        final String size;
+        final String price;
 
-        SearchRequestParams(String q, String from){
-            this.q = q;
-            this.from = from;
+        SingleItem(String drink, String size, String price){
+            this.drink = drink;
+            this.size = size;
+            this.price = price;
         }
     }
 
 
-//    @Test
-//    public void fetchAsGSONSerializedObject() throws Exception {
-//        SearchRequestParams params = new SearchRequestParams("something", "2008");
-//
-//        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/SingleReceipt")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(gson.toJson(params));
-//
-//        this.mvc.perform(request)
-//                .andExpect(status().isOk())
-//                .andExpect(content().string("Search: q=Something from=2008"));
-//    }
-//
-//    @Test
-//    public void fetchAsRawBodyFromFileFixturePull() throws Exception {
-//        String json = getJSON("/data.json");
-//
-//        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/ManyReceipts")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(json);
-//
-//        this.mvc.perform(request)
-//                .andExpect(status().isOk())
-//                .andExpect(content().string(json));
-//    }
-//
-//    private String getJSON(String path) throws Exception {
-//        URL url = this.getClass().getResource(path);
-//        return new String(Files.readAllBytes(Paths.get(url.getFile())));
-//    }
+    @Test
+    public void fetchAsGSONSerializedObject() throws Exception {
+        SingleItem item = new SingleItem("Italian Soda", "large", "4.50");
+
+        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/SingleItem")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(gson.toJson(item));
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Item is a large Italian Soda at $4.50"));
+    }
+
+    @Test
+    public void fetchAsRawBodyFromFileFixturePull() throws Exception {
+        String receiptsJSON = getJSON("/orderdata.json");
+
+        MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/OrderDetail")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(receiptsJSON);
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string(receiptsJSON));
+    }
+
+    private String getJSON(String path) throws Exception {
+        URL url = this.getClass().getResource(path);
+        return new String(Files.readAllBytes(Paths.get(url.getFile())));
+    }
 }
