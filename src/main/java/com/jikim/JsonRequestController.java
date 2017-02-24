@@ -23,6 +23,11 @@ public class JsonRequestController {
         return item.getDrink();
     }
 
+    @PostMapping("/OrderDetail")
+    public String getRawDataFromFileFixture(@RequestBody OrderDetail order) throws Exception {
+        return order.items[0].getDrink();
+    }
+
     static class Item {
         private String drink;
         private String size;
@@ -84,11 +89,5 @@ public class JsonRequestController {
         public void setItems(Item[] items) {
             this.items = items;
         }
-
-    }
-
-    @PostMapping("/OrderDetail")
-    public String getRawDataFromFileFixture(@RequestBody OrderDetail order) throws Exception {
-        return order.items[0].getDrink();
     }
 }

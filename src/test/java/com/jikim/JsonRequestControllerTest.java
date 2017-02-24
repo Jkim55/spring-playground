@@ -94,11 +94,11 @@ public class JsonRequestControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string(receiptsJSON));
+                .andExpect(content().string("Cortado"));
     }
 
     private String getJSON(String path) throws Exception {
         URL url = this.getClass().getResource(path);
-        return new String(Files.readAllBytes(Paths.get(url.getFile())));
+        return new String(Files.readAllBytes(Paths.get(url.toURI())));
     }
 }
