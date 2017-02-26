@@ -1,5 +1,6 @@
-package com.jikim;
+package com.jikim.controller;
 
+import com.jikim.model.InventorySearchParams;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

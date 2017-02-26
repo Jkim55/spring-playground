@@ -1,6 +1,7 @@
-package com.jikim;
+package com.jikim.controller;
 
 
+import com.jikim.model.CommentBody;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 

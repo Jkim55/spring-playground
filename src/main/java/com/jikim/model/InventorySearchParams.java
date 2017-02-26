@@ -1,4 +1,4 @@
-package com.jikim;
+package com.jikim.model;
 
 public class InventorySearchParams {
     private int designerId;

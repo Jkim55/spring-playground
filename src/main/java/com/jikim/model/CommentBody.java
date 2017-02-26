@@ -1,6 +1,4 @@
-package com.jikim;
-
-import org.springframework.web.bind.annotation.RequestBody;
+package com.jikim.model;
 
 public class CommentBody {
     private String comment;
