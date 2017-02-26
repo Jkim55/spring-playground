@@ -40,7 +40,7 @@ public class JsonRequestControllerTest {
     }
 
     @Test
-    public void fetchAsGSONwithBuilder() throws Exception {
+    public void fetchWithGSONwithBuilder() throws Exception {
         JsonObject order = new JsonObject();
         order.addProperty("Medium Mocha Latte", false);
 
@@ -72,7 +72,7 @@ public class JsonRequestControllerTest {
 
 
     @Test
-    public void fetchAsGSONSerializedObject() throws Exception {
+    public void fetchWithGSONSerializedObject() throws Exception {
         SingleItem item = new SingleItem("Italian Soda", "large", "4.50");
 
         MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/SingleItem")
