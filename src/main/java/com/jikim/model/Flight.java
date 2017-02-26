@@ -61,18 +61,4 @@ public class Flight {
     public void setPassengers(List<Person> passengers) {
         this.passengers = passengers;
     }
-
-//    static class Person {
-//        private final String name;
-//
-//        @JsonCreator
-//        public Person(@JsonProperty("name") String name) {
-//            this.name = name;
-//        }
-//
-//        public String getName() {
-//            return name;
-//        }
-//    }
-
 }
