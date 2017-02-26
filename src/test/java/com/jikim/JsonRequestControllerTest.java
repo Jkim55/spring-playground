@@ -70,7 +70,6 @@ public class JsonRequestControllerTest {
         }
     }
 
-
     @Test
     public void fetchWithGSONSerializedObject() throws Exception {
         SingleItem item = new SingleItem("Italian Soda", "large", "4.50");
@@ -94,7 +93,7 @@ public class JsonRequestControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Cortado"));
+                .andExpect(content().string("[{\"drink\":\"Cortado\",\"size\":\"N/A\",\"price\":\"2.75\"},{\"drink\":\"Lemongrass Tea\",\"size\":\"large\",\"price\":\"3.85\"}]"));
     }
 
     private String getJSON(String path) throws Exception {

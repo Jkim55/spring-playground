@@ -24,8 +24,8 @@ public class JsonRequestController {
     }
 
     @PostMapping("/OrderDetail")
-    public String getRawDataFromFileFixture(@RequestBody OrderDetail order) throws Exception {
-        return order.items[0].getDrink();
+    public Item[] getRawDataFromFileFixture(@RequestBody OrderDetail order) throws Exception {
+        return order.items;
     }
 
     static class Item {
