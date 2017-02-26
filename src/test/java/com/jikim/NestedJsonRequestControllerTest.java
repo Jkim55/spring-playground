@@ -15,7 +15,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(NestedJsonRequestController.class)
-
 public class NestedJsonRequestControllerTest{
 
     @Autowired
@@ -33,17 +32,13 @@ public class NestedJsonRequestControllerTest{
     }
 
 //    @Test
-//    public void fetchWithGSONBuilder() throws Exception {
-//
-//    }
-//
-//    @Test
 //    public void fetchWithGSONSerializedObject() throws Exception {
 //
 //    }
-//
+
 //    @Test
 //    public void fetchAsRawBodyFromFileFixturePull() throws Exception {
 //
 //    }
+
 }
