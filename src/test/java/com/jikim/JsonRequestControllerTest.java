@@ -46,9 +46,9 @@ public class JsonRequestControllerTest {
         JsonObject order = new JsonObject();
         order.addProperty("Medium Mocha Latte", false);
 
-        Gson builder = new GsonBuilder().create();                  // 3
+        Gson builder = new GsonBuilder().create();
 
-        String jsonString = builder.toJson(order);                 // 4
+        String jsonString = builder.toJson(order);
 
         MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/OrderProgress")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -58,11 +58,10 @@ public class JsonRequestControllerTest {
                 .andExpect(status().isOk());
     }
 
-    private Gson gson = new GsonBuilder().create();
-
     @Test
     public void fetchWithGSONSerializedObject() throws Exception {
         Item item = new Item("Italian soda", "large", "4.50");
+        Gson gson = new GsonBuilder().create();
 
         MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/SingleItem")
                 .contentType(MediaType.APPLICATION_JSON)
