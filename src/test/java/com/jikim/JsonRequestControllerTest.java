@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import com.jikim.controller.JsonRequestController;
+import com.jikim.model.Item;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,21 +60,9 @@ public class JsonRequestControllerTest {
 
     private Gson gson = new GsonBuilder().create();
 
-    static class  SingleItem {
-        final String drink;
-        final String size;
-        final String price;
-
-        SingleItem(String drink, String size, String price){
-            this.drink = drink;
-            this.size = size;
-            this.price = price;
-        }
-    }
-
     @Test
     public void fetchWithGSONSerializedObject() throws Exception {
-        SingleItem item = new SingleItem("Italian Soda", "large", "4.50");
+        Item item = new Item("Italian soda", "large", "4.50");
 
         MockHttpServletRequestBuilder request = post("/FluidCoffeeBar/SingleItem")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -81,7 +70,7 @@ public class JsonRequestControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Item is a large Italian Soda at $4.50"));
+                .andExpect(content().string("Item is a large Italian soda at $4.50"));
     }
 
     @Test
