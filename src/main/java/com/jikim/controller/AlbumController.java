@@ -20,7 +20,7 @@ public class AlbumController {
 
     @PostMapping
     public Album create(@RequestBody Album album) {
-        this.repository.save(album);
+        return this.repository.save(album);
     }
 
 }
