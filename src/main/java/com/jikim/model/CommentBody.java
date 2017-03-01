@@ -19,4 +19,5 @@ public class CommentBody {
     public void setAuthor(String author) {
         this.author = author;
     }
+
 }
