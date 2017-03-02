@@ -1,17 +1,19 @@
 package com.jikim.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String name;
-    String bandName;
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "title")
+    String title;
+
+    @Column(name = "artist")
+    String artist;
 
     public Long getId() {
         return id;
@@ -21,20 +23,20 @@ public class Album {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getBandName() {
-        return bandName;
+    public String getArtist() {
+        return artist;
     }
 
-    public void setBandName(String bandName) {
-        this.bandName = bandName;
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.jikim;
+package com.jikim.database;
 
 import com.jikim.model.Album;
 import org.springframework.data.repository.CrudRepository;
