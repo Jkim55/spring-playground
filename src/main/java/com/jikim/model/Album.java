@@ -1,5 +1,7 @@
 package com.jikim.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,9 +11,11 @@ public class Album {
     @Column(name = "id")
     private Long id;
 
+    @NotEmpty
     @Column(name = "title")
     String title;
 
+    @NotEmpty
     @Column(name = "artist")
     String artist;
 

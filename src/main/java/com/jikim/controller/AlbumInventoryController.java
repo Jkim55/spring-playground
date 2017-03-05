@@ -1,8 +1,10 @@
 package com.jikim.controller;
 
-        import com.jikim.database.AlbumRepository;
-        import com.jikim.model.Album;
-        import org.springframework.web.bind.annotation.*;
+import com.jikim.database.AlbumRepository;
+import com.jikim.model.Album;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/album")
@@ -19,7 +21,7 @@ public class AlbumInventoryController {
     }
 
     @PostMapping
-    public Album createAlbum(@RequestBody Album album) {
+    public Album createAlbum(@Valid @RequestBody Album album) {
         this.repository.save(album);
         return album;
     }
