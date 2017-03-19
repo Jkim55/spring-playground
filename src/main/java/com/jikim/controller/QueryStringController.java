@@ -1,6 +1,6 @@
 package com.jikim.controller;
 
-import com.jikim.model.Girl;
+import com.jikim.GirlsString;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +25,7 @@ public class QueryStringController {
     }
 
     @GetMapping("customObject/girls")
-    public String findFromCustomObject(Girl girl){
-        return String.format("Girl name is %s %s", girl.getFname(), girl.getLname());
+    public String findFromCustomObject(GirlsString girl){
+        return String.format("The girl's name is %s %s", girl.getFname(), girl.getLname());
     }
 }

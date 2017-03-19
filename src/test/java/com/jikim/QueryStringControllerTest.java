@@ -44,6 +44,6 @@ public class QueryStringControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Girl name is Hannah Horvath"));
+                .andExpect(content().string("The girl's name is Hannah Horvath"));
     }
 }
